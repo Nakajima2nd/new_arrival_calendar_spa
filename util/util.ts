@@ -23,10 +23,36 @@ export const groupByCategory = (list: Array<Item>) => list.reduce((acc: Array<{ 
     return acc
 }, [])
 
+export const getCategories = (list: Array<Item>) => {
+    const categories = list.reduce((acc: Array<Category>, cur) => {
+        if (!acc.some(({ id }) => id == cur.category)) {
+            acc.push({ label: cur.category ? cur.category : "分類なし", id: cur.category, checked: true })
+        }
+        return acc
+    }, [])
 
-export const getCategories = (list: Array<Item>) => list.reduce((acc: Array<Category>, cur) => {
-    if (!acc.some(({ id }) => id == cur.category)) {
-        acc.push({ label: cur.category ? cur.category : "分類なし", id: cur.category, checked: true })
+    const newCategories = replace.reduce((acc, cur) => {
+        return acc.map(category => category.id == cur.from ? {...category, label: cur.to}: category)
+    }, categories)
+
+    return newCategories
+}
+
+const replace = [
+    {
+        from: "サンドイッチ・ロールパン",
+        to: "パン"
+    },
+    {
+        from: "そば・うどん・中華麺",
+        to: "麺"
+    },
+    {
+        from: "",
+        to: "飲料・お菓子"
+    },
+    {
+        from: "揚げ物・フランク・焼き鳥",
+        to: "ホットスナック"
     }
-    return acc
-}, [])
+]

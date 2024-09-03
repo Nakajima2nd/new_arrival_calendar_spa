@@ -1,5 +1,5 @@
 import { useGetSevenData } from "@/hook/getData"
-import { Seven } from "@/component/seven";
+import { Seven } from "@/components/seven";
 
 const Home = async () => {
 
