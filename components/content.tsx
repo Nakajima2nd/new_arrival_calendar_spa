@@ -57,7 +57,7 @@ const Modal: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boolean>>, 
 }
 
 const Dialog: React.FC<{ item: Item, setOpen: React.Dispatch<React.SetStateAction<boolean>>, open: boolean }> = ({ item, setOpen, open }) => {
-    const style = `p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 h-4/5 bg-white z-30 duration-500 ${open ? "visible opacity-100" : "invisible opacity-0"}`
+    const style = `p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 h-4/5 bg-white overflow-y-scroll z-30 duration-500 ${open ? "visible opacity-100" : "invisible opacity-0"}`
     return (
         <div className={style}>
             <div className="text-lg">{item.name}</div>
@@ -66,7 +66,7 @@ const Dialog: React.FC<{ item: Item, setOpen: React.Dispatch<React.SetStateActio
                 <div>{item.price}円(税込{item.tax_price}円)</div>
             </div>
             <div className="w-full">
-                <Image src={item.image_url} width={640} height={480} alt={item.name} style={{ width: "100%", height: "auto" }} />
+                <Image src={item.image_url} width={640} height={480} alt={item.name} style={{ width: "100%", maxWidth: "640px", height: "auto" }} />
             </div>
             <div>{item.description}</div>
         </div>
