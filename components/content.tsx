@@ -46,7 +46,7 @@ export const Content: React.FC<{ displayData: DisplayData }> = ({ displayData })
 const Modal: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boolean>>, setItem: React.Dispatch<React.SetStateAction<Item>>, open: boolean }> = ({ setOpen, setItem, open }) => {
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
         setOpen(false)
-        setItem(initialItem)
+        setTimeout(() => setItem(initialItem), 300)
     }
 
     const style = `fixed top-0 left-0 w-full h-full bg-black z-20  duration-500 ${open ? "visible opacity-50" : "invisible opacity-0"}`
@@ -60,15 +60,15 @@ const Dialog: React.FC<{ item: Item, setOpen: React.Dispatch<React.SetStateActio
     const style = `p-2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 h-4/5 bg-white z-30 duration-500 ${open ? "visible opacity-100" : "invisible opacity-0"}`
     return (
         <div className={style}>
-            <div className="text-lg w-">{item.name}</div>
+            <div className="text-lg">{item.name}</div>
             <div>
                 <div>{item.arrival}</div>
                 <div>{item.price}円(税込{item.tax_price}円)</div>
             </div>
-            <div className="w-full relative">
-                <Image src={item.image_url} fill alt={item.name} style={{ position: "", objectFit: "fill", height: "" }} />
+            <div className="w-full">
+                <Image src={item.image_url} width={640} height={480} alt={item.name} style={{ width: "100%", height: "auto" }} />
             </div>
-            <div className="relative">{item.description}</div>
+            <div>{item.description}</div>
         </div>
     )
 }
