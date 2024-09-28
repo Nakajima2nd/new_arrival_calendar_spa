@@ -8,10 +8,8 @@ import { Category, DisplayData } from "@/type/types"
 export const Seven: React.FC<{ data: DisplayData, categories: Array<Category> }> = ({ data, categories }) => {
     const [displayData, setDisplayData] = useState(data)
 
-    return (
-        <div className="relative">
-            <Filter displayData={displayData} setDisplayData={setDisplayData} categories={categories} />
-            <Content displayData={displayData} />
-        </div>
-    )
+    return (<>
+        <Filter displayData={displayData} setDisplayData={setDisplayData} categories={categories} />
+        <Content displayData={displayData} />
+    </>)
 }

@@ -49,7 +49,7 @@ export const Filter: React.FC<FilterProps> = ({ displayData, setDisplayData, cat
     }, [filter])
 
     return (
-        <div className="flex overflow-x-scroll fixed top-0 w-full h-16 z-50 bg-white">
+        <div className="flex overflow-x-scroll fixed top-0 w-full h-16 z-10 bg-white">
             <Checkbox checked={allChecked} id="全て" label="全て" onChange={handleChangeAll} />
             {filter.map((ele, index) => <Checkbox key={index} checked={ele.checked} id={ele.id} label={ele.label} onChange={handleChange} />)}
         </div>

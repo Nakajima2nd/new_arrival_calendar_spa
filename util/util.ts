@@ -26,13 +26,13 @@ export const groupByCategory = (list: Array<Item>) => list.reduce((acc: Array<{ 
 export const getCategories = (list: Array<Item>) => {
     const categories = list.reduce((acc: Array<Category>, cur) => {
         if (!acc.some(({ id }) => id == cur.category)) {
-            acc.push({ label: cur.category ? cur.category : "分類なし", id: cur.category, checked: true })
+            acc.push({ label: cur.category, id: cur.category, checked: true })
         }
         return acc
     }, [])
 
     const newCategories = replace.reduce((acc, cur) => {
-        return acc.map(category => category.id == cur.from ? {...category, label: cur.to}: category)
+        return acc.map(category => category.id == cur.from ? { ...category, label: cur.to } : category)
     }, categories)
 
     return newCategories
