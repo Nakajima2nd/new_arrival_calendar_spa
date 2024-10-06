@@ -1,6 +1,6 @@
-import { DisplayData, Item } from "@/type/types"
+import { DisplayDataCate, Item } from "@/type/types"
 import Image from "next/image"
-import { Fragment, useState } from "react"
+import { useState } from "react"
 
 const initialItem = {
     id: "",
@@ -13,9 +13,10 @@ const initialItem = {
     url: "",
     image_url: ""
 }
-export const Content: React.FC<{ displayData: DisplayData }> = ({ displayData }) => {
+export const Content: React.FC<{ displayData: DisplayDataCate }> = ({ displayData }) => {
     const [open, setOpen] = useState(false)
     const [item, setItem] = useState<Item>(initialItem)
+
     const onClick = (item: Item) => {
         setOpen(true)
         setItem(item)
@@ -23,11 +24,11 @@ export const Content: React.FC<{ displayData: DisplayData }> = ({ displayData })
 
     return (<>
         <div className="absolute top-16 w-full">
-            {displayData.filter(({ show }) => show).map((arri, index) => (
-                <Fragment key={index}>
-                    <div className="sticky top-16 text-2xl font-bold text-white bg-green-700/80">{arri.arrival}</div>
+            {displayData.filter(({ show }) => show).map((cate, index) => (
+                <div key={index}>
+                    <div className="sticky top-16 text-2xl font-bold text-white bg-green-700/80">{cate.category}</div>
                     <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,_1fr))]">
-                        {arri.list.filter(({ show }) => show).reduce((acc: Array<Item>, cur) => acc.concat(cur.list), []).map((item, index) => (
+                        {cate.list.filter(({ show }) => show).reduce((acc: Array<Item>, cur) => acc.concat(cur.list), []).map((item, index) => (
                             <div key={index} className="mx-auto p-2">
                                 <Image src={item.image_url} width={304} height={228} alt={item.name} onClick={() => onClick(item)} />
                                 <div>{item.name}</div>
@@ -35,7 +36,7 @@ export const Content: React.FC<{ displayData: DisplayData }> = ({ displayData })
                             </div>
                         ))}
                     </div>
-                </Fragment>
+                </div>
             ))}
         </div>
         <Modal setOpen={setOpen} setItem={setItem} open={open} />

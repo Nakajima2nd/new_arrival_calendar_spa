@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { Filter } from "@/components/filter"
 import { Content } from "@/components/content"
-import { Category, DisplayData } from "@/type/types"
+import { Category, DisplayDataCate } from "@/type/types"
 
-export const Seven: React.FC<{ data: DisplayData, categories: Array<Category> }> = ({ data, categories }) => {
+export const Seven: React.FC<{ data: DisplayDataCate, categories: Array<Category> }> = ({ data, categories }) => {
     const [displayData, setDisplayData] = useState(data)
 
     return (<>

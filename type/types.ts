@@ -18,12 +18,23 @@ export type Category = {
     id: string
 }
 
-export type DisplayData = Array<{
+export type DisplayDataArri = Array<{
     arrival: string,
     show: boolean,
     list: Array<{
         category: string,
         show: boolean,
+        list: Array<Item>
+    }>
+}>
+
+export type DisplayDataCate = Array<{
+    category: string,
+    show: boolean,
+    list: Array<{
+        arrival: string,
+        show: boolean,
+        isOnSale: boolean,
         list: Array<Item>
     }>
 }>
