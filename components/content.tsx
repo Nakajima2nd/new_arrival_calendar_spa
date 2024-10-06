@@ -1,4 +1,4 @@
-import { DisplayDataCate, Item } from "@/type/types"
+import { CateItem, DisplayDataCate, Item } from "@/type/types"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -27,15 +27,7 @@ export const Content: React.FC<{ displayData: DisplayDataCate }> = ({ displayDat
             {displayData.filter(({ show }) => show).map((cate, index) => (
                 <div key={index}>
                     <div className="sticky top-16 text-2xl font-bold text-white bg-green-700/80">{cate.category}</div>
-                    <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,_1fr))]">
-                        {cate.list.filter(({ show }) => show).reduce((acc: Array<Item>, cur) => acc.concat(cur.list), []).map((item, index) => (
-                            <div key={index} className="mx-auto p-2">
-                                <Image src={item.image_url} width={304} height={228} alt={item.name} onClick={() => onClick(item)} />
-                                <div>{item.name}</div>
-                                <div>{item.price}円</div>
-                            </div>
-                        ))}
-                    </div>
+                    <Flex setOpen={setOpen} setItem={setItem} cate={cate} />
                 </div>
             ))}
         </div>
@@ -43,6 +35,45 @@ export const Content: React.FC<{ displayData: DisplayDataCate }> = ({ displayDat
         <Dialog item={item} setOpen={setOpen} open={open} />
     </>)
 }
+
+const Grid: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boolean>>, setItem: React.Dispatch<React.SetStateAction<Item>>, cate: { category: string, show: boolean, list: Array<CateItem> } }> = ({ setOpen, setItem, cate }) => {
+    const onClick = (item: Item) => {
+        setOpen(true)
+        setItem(item)
+    }
+
+    return (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,_1fr))]">
+            {cate.list.filter(({ show }) => show).reduce((acc: Array<Item>, cur) => acc.concat(cur.list), []).map((item, index) => (
+                <div key={index} className="mx-auto p-2">
+                    <Image src={item.image_url} width={304} height={228} alt={item.name} onClick={() => onClick(item)} />
+                    <div>{item.name}</div>
+                    <div>{item.price}円</div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+const Flex: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boolean>>, setItem: React.Dispatch<React.SetStateAction<Item>>, cate: { category: string, show: boolean, list: Array<CateItem> } }> = ({ setOpen, setItem, cate }) => {
+    const onClick = (item: Item) => {
+        setOpen(true)
+        setItem(item)
+    }
+
+    return (
+        <div className="flex overflow-x-scroll">
+            {cate.list.filter(({ show }) => show).reduce((acc: Array<Item>, cur) => acc.concat(cur.list), []).map((item, index) => (
+                <div key={index} className="basis-80 shrink-0">
+                    <Image src={item.image_url} width={304} height={228} alt={item.name} onClick={() => onClick(item)} />
+                    <div>{item.name}</div>
+                    <div>{item.price}円</div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
 
 const Modal: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boolean>>, setItem: React.Dispatch<React.SetStateAction<Item>>, open: boolean }> = ({ setOpen, setItem, open }) => {
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {

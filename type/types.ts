@@ -31,10 +31,12 @@ export type DisplayDataArri = Array<{
 export type DisplayDataCate = Array<{
     category: string,
     show: boolean,
-    list: Array<{
-        arrival: string,
-        show: boolean,
-        isOnSale: boolean,
-        list: Array<Item>
-    }>
+    list: Array<CateItem>
 }>
+
+export type CateItem = {
+    arrival: string,
+    show: boolean,
+    isOnSale: boolean,
+    list: Array<Item>
+}
