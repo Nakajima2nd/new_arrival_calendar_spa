@@ -18,7 +18,7 @@ export const Filter: React.FC<FilterProps> = ({ displayData, setDisplayData }) =
                 ...cate,
                 list: cate.list.map(arri => ({
                     ...arri,
-                    show: arri.isOnSale || event.target.checked
+                    show: arri.isOnSale || !event.target.checked
                 }))
             }))
         )
